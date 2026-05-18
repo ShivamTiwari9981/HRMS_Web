@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Loader } from './loader';
+import { OnboardingLayout } from './onboarding-layout';
 
-describe('Loader', () => {
-  let component: Loader;
-  let fixture: ComponentFixture<Loader>;
+describe('OnboardingLayout', () => {
+  let component: OnboardingLayout;
+  let fixture: ComponentFixture<OnboardingLayout>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Loader]
+      imports: [OnboardingLayout]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Loader);
+    fixture = TestBed.createComponent(OnboardingLayout);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

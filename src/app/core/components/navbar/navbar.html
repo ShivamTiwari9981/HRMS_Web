@@ -1,0 +1,41 @@
+<mat-toolbar class="navbar">
+
+  <div class="left-section">
+    <button
+      mat-icon-button
+      class="icon-btn"
+      (click)="onToggleSidebar()">
+
+      <mat-icon>menu</mat-icon>
+
+    </button>
+
+    <span class="logo">HRMS Portal</span>
+  </div>
+
+  <div class="right-section">
+
+    <button mat-icon-button matBadge="5" matBadgeColor="warn">
+      <mat-icon>notifications</mat-icon>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+      Admin
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+        Profile
+      </button>
+
+      <button mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </mat-menu>
+
+  </div>
+
+</mat-toolbar>

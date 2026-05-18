@@ -9,6 +9,8 @@ import { FormGroup,FormBuilder, FormControl,ReactiveFormsModule, Validators} fro
 import { AuthService } from '../../../core/service/auth.service';
 import { firstValueFrom } from 'rxjs';
 import { NotificationService } from '../../../core/service/notification.service';
+import { StorageService } from '../../../core/service/storage.service';
+import { SESSION_STORAGE } from '../../../core/constants/global.constant';
 @Component({
   selector: 'app-login',
   imports: [MatCard, MatFormField, MatLabel, MatError,MatInputModule,MatButtonModule,RouterModule,ReactiveFormsModule],
@@ -25,6 +27,7 @@ export class Login {
   private router = inject(Router);
   private authService = inject(AuthService);
   private notification = inject(NotificationService);
+  private storageSession = inject(StorageService);
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -34,32 +37,30 @@ export class Login {
   }
 
 
-   async onLogin() {
-    if (this.loginForm.invalid) return;
-    this.isLoading = true;
-    try {
-      const response = await firstValueFrom(
-      this.authService.login(this.loginForm.value)
-      
-      
-    );
-    if(response.IsSuccess)
-    {
-      console.log(response)
-      this.notification.success(response.Message)
-      await this.router.navigate(['/dashboard']);
-      return 
-      
-    }
-      
-      
-    } 
-    catch (error: any) {
-      console.log("ehh")
-      this.notification.error(error.error.Message)
-      
-    } finally {
-      this.isLoading = false;
-    }
+      async onLogin() {
+        if (this.loginForm.invalid) return;
+        this.isLoading = true;
+        try {
+          const response = await firstValueFrom(
+          this.authService.login(this.loginForm.value)
+        );
+        if(response.IsSuccess)
+        {
+          this.storageSession.set(SESSION_STORAGE.TOKEN,response.token)
+          this.notification.success(response.Message)
+          await this.router.navigate(['/dashboard']);
+          return 
+          
+        }
+          
+          
+        } 
+        catch (error: any) {
+          console.log("ehh")
+          this.notification.error(error.error.Message)
+          
+        } finally {
+          this.isLoading = false;
+        }
   }
 }

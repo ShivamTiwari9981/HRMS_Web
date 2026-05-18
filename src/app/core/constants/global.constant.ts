@@ -8,3 +8,8 @@ export const API_END_POINT = {
         API_CLIENT_REGISTER:"/auth/client-register",
         API_SIGNUP :"/auth/signup"
 }
+
+
+export const SESSION_STORAGE = {
+  TOKEN:"TOKEN"
+}

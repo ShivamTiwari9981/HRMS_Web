@@ -1,0 +1,168 @@
+.sidebar {
+  width: 270px;
+  height: 100vh;
+
+  background: #020817;
+
+  padding: 24px 16px;
+
+  overflow-y: auto;
+}
+
+/* Logo */
+
+.logo-section {
+  height: 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 30px;
+}
+
+.logo-section h1 {
+  color: white;
+
+  font-size: 30px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+/* Menu */
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Common Menu Style */
+
+.menu-item,
+.submenu-item {
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+
+  border-radius: 14px;
+
+  transition: all 0.3s ease;
+
+  cursor: pointer;
+}
+
+/* Main Menu */
+
+.menu-item {
+  height: 54px;
+
+  padding: 0 18px;
+
+  color: #cbd5e1;
+}
+
+.menu-item:hover {
+  background: rgba(255,255,255,0.08);
+
+  color: white;
+}
+
+.active-menu {
+  background: #1e293b;
+
+  color: white;
+}
+
+/* Menu Left */
+
+.menu-left {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  width: 100%;
+}
+
+/* Icons */
+
+mat-icon {
+  font-size: 22px !important;
+
+  width: 22px !important;
+  height: 22px !important;
+
+  color: inherit !important;
+}
+
+/* Text */
+
+.menu-item span,
+.menu-panel span {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Expansion Panel */
+
+.menu-panel {
+  background: transparent !important;
+
+  box-shadow: none !important;
+
+  border-radius: 14px !important;
+
+  color: #cbd5e1 !important;
+}
+
+.menu-panel:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+/* Remove Material Default */
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 6px 0 0 0 !important;
+}
+
+::ng-deep .mat-expansion-indicator::after {
+  color: #94a3b8 !important;
+}
+
+/* Submenu */
+
+.submenu {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  padding-left: 14px;
+
+  margin-top: 6px;
+}
+
+.submenu-item {
+  height: 46px;
+
+  padding: 0 14px;
+
+  gap: 14px;
+
+  color: #94a3b8;
+}
+
+.submenu-item:hover {
+  background: rgba(255,255,255,0.08);
+
+  color: white;
+}
+
+.active-submenu {
+  background: #172554;
+
+  color: #60a5fa;
+}

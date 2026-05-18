@@ -1,0 +1,51 @@
+<div class="sidebar">
+
+  <!-- Logo -->
+  <div class="logo-section">
+    <h2>HRMS</h2>
+  </div>
+
+  <!-- Menu -->
+  <div class="menu-container">
+    @for (item of menuItems; track item.title) {
+
+      @if (!item.children) {
+        <!-- Normal Menu -->
+        <a
+          class="menu-item"
+          [routerLink]="item.route"
+          routerLinkActive="active-menu">
+          <div class="menu-left">
+            <mat-icon>{{ item.icon }}</mat-icon>
+            <span>{{ item.title }}</span>
+          </div>
+        </a>
+      } @else {
+        <!-- Expandable Menu -->
+        <mat-expansion-panel class="menu-panel">
+          <mat-expansion-panel-header>
+            <div class="menu-left">
+              <mat-icon>{{ item.icon }}</mat-icon>
+              <span>{{ item.title }}</span>
+            </div>
+          </mat-expansion-panel-header>
+
+          <!-- Child Items -->
+          <div class="submenu">
+            @for (child of item.children; track child.title) {
+              <a
+                class="submenu-item"
+                [routerLink]="child.route"
+                routerLinkActive="active-submenu">
+                <mat-icon>{{ child.icon }}</mat-icon>
+                <span>{{ child.title }}</span>
+              </a>
+            }
+          </div>
+        </mat-expansion-panel>
+      }
+
+    }
+  </div>
+
+</div>

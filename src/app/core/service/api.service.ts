@@ -10,9 +10,6 @@ export class ApiService {
   private http =inject(HttpClient);
   private api_url ="";
   
-
-
-
   get<T>(url: string) {
     this.api_url =this.apiURL+url;
     return this.http.get<T>(url);
