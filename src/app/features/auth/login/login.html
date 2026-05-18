@@ -1,0 +1,40 @@
+<!-- <div class="login-container"> -->
+    <mat-card class="auth-card">
+  <!-- <mat-card class="login-card"> -->
+
+    <h2 class="title">Login</h2>
+
+    <form  [formGroup]="loginForm">
+      <!-- Username -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>UserEmail</mat-label>
+        <input matInput formControlName="UserEmail" placeholder="Enter User Email">
+        <mat-error if="submitted && f.UserEmail.errors">
+          User Email is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="Password" placeholder="Enter password">
+        <mat-error if="submitted && f.Password.errors">
+          Password must be at least 4 characters
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Login Button -->
+      <button mat-raised-button color="primary" class="full-width" (click)="onLogin()">
+        Login
+      </button>
+
+    </form>
+
+    <!-- Signup Link -->
+    <div class="signup">
+      <span>Don't have an account?</span>
+      <a routerLink="/account/signup">Sign Up</a>
+    </div>
+
+  </mat-card>
+<!-- </div> -->

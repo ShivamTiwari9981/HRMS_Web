@@ -1,0 +1,24 @@
+.auth-container {
+  display: flex;
+   height: 95vh; 
+  /* height: 100%; */
+
+  .left {
+    flex: 1;
+    background: linear-gradient(135deg, #3f51b5, #673ab7);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+}
