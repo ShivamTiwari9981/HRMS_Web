@@ -4,11 +4,20 @@ import { Login } from './login/login';
 import { Signup } from './signup/signup';
 
 const routes: Routes = [
-  {path:'',component:Login},
-  {path:'account/login',component:Login},
-  {path:'account/signup',component:Signup},
-  // {path:'forgetpassword',component:ForgetPassword}
+  {
+    path:'',
+    component:Login
+  },
 
+  {
+    path:'account/login',
+    component:Login
+  },
+
+  {
+    path:'account/signup',
+    component:Signup
+  },
 ];
 
 @NgModule({

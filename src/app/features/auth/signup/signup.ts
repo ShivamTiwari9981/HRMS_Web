@@ -9,6 +9,7 @@ import { Router, RouterModule } from '@angular/router';
 import { FormGroup,FormBuilder, FormControl,ReactiveFormsModule, Validators} from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../../../core/service/auth.service';
+import { NotificationService } from '../../../core/service/notification.service';
 @Component({
   selector: 'app-signup',
   imports: [MatCard, MatFormField, RouterModule,MatLabel, MatError, MatIcon,ReactiveFormsModule,MatInputModule,MatButtonModule,RouterModule],
@@ -23,16 +24,18 @@ export class Signup {
   submitted = false;
   private fb = inject(FormBuilder);
   private auth = inject(AuthService);
-  constructor (private router : Router){}
+  private notification = inject(NotificationService);
+  private router = inject(Router);
+  
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
       UserName: ['comapny1@gmail.com', [Validators.required]],
-      Email: ['shivamtiwari8756@gmail.com', [Validators.required, Validators.email]],      
-  Password: ['Shivam@9981', [
-  Validators.required,
-  Validators.minLength(6),
-  Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/)
+      UserEmail: ['shivamtiwari8756@gmail.com', [Validators.required, Validators.email]],      
+      Password: ['Shivam@9981', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/)
 ]],
 
   ConfirmPassword: ['Shivam@9981', [
@@ -47,24 +50,56 @@ export class Signup {
     return this.signupForm.controls;
   }
  loading = false;
-  async signup() {
-    if (this.signupForm.invalid) return;
-    const model: SignupModel = this.signupForm.value;
-    this.loading = true;
-    try {
-      const res = await firstValueFrom(
-        this.auth.registerClient(model)
-      );
-      console.log('Client Registered:', res);
-      this.router.navigate(['/auth/login'])
-    } 
-    catch (error: any) {
-      console.error('Registration failed', error);
-    } 
-    finally {
-      this.loading = false;
-    }
+
+async signup() {
+
+  if (this.signupForm.invalid) {
+    this.signupForm.markAllAsTouched();
+    return;
   }
+
+  const model: SignupModel = this.signupForm.value;
+
+  this.loading = true;
+
+  try {
+
+    const res = await firstValueFrom(
+      this.auth.signup(model)
+    );
+
+    if (res.IsSuccess) {
+
+      this.notification.success(res.Message);
+
+      console.log('Signup User:', res);
+
+      await this.router.navigate(['/account/login']);
+
+    } else {
+
+      this.notification.error(res.Message);
+
+    }
+
+  } 
+  catch (error: any) {
+
+    console.log(error);
+
+    this.notification.error(
+      error?.error?.Message ||
+      error?.message ||
+      'Signup Failed'
+    );
+
+  } 
+  finally {
+
+    this.loading = false;
+
+  }
+}
 
   
 }

@@ -1,0 +1,16 @@
+.layout-container {
+  height: 100vh;
+}
+
+.sidebar {
+  width: 280px;
+  background: #0f172a;
+  color: white;
+}
+
+.page-content {
+  padding: 20px;
+  background: #f1f5f9;
+  min-height: calc(100vh - 128px);
+}
+

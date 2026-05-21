@@ -1,0 +1,35 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.welcome-card {
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  color: white;
+  padding: 30px;
+  border-radius: 16px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.stats-card {
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.chart-card {
+  padding: 20px;
+  border-radius: 16px;
+  min-height: 300px;
+}
+
+.charts-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+}

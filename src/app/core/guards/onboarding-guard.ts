@@ -2,17 +2,17 @@ import { CanActivateFn, Router } from '@angular/router';
 import { StorageService } from '../service/storage.service';
 import { inject } from '@angular/core';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const onboardingGuard: CanActivateFn = (route, state) => {
   const storageService = inject(StorageService);
   const router = inject(Router);
 
-  console.log(storageService.isLoggedIn())
+  const isCompleted =
+    storageService.IsCompanyProfieCompete();
 
-  if (storageService.isLoggedIn()) {
+  if (!isCompleted) {
     return true;
   }
 
-  // Redirect to login if unauthenticated
-  router.navigate(['/account/login']);
+  router.navigate(['/dashboard']);
   return false;
 };
