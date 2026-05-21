@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { LoginModel } from '../models/login.model';
 import { MatCard } from "@angular/material/card";
 import { MatFormField, MatLabel, MatError } from "@angular/material/input";
 import { MatInputModule } from '@angular/material/input';
@@ -37,30 +36,53 @@ export class Login {
   }
 
 
-      async onLogin() {
-        if (this.loginForm.invalid) return;
-        this.isLoading = true;
-        try {
-          const response = await firstValueFrom(
-          this.authService.login(this.loginForm.value)
-        );
-        if(response.IsSuccess)
-        {
-          this.storageSession.set(SESSION_STORAGE.TOKEN,response.token)
-          this.notification.success(response.Message)
-          await this.router.navigate(['/dashboard']);
-          return 
-          
-        }
-          
-          
-        } 
-        catch (error: any) {
-          console.log("ehh")
-          this.notification.error(error.error.Message)
-          
-        } finally {
-          this.isLoading = false;
-        }
+  async onLogin() {
+
+  if (this.loginForm.invalid) return;
+
+  this.isLoading = true;
+
+  try {
+    const response = await firstValueFrom(
+      this.authService.login(this.loginForm.value)
+    );
+    if (response.IsSuccess) {
+
+      this.set_session(
+        response.Data
+      );
+      if (response.Data.user.IsCompanyProfileCreated) {
+
+        this.router.navigate(['/dashboard/home']);
+
+      } else {
+
+        this.router.navigate(['/company-setup']);
+      }
+
+      this.notification.success(response.Message);
+    }
+
+  } catch (error: any) {
+
+    this.notification.error(
+      error?.error?.Message || 'Login Failed'
+    );
+
+  } finally {
+
+    this.isLoading = false;
+  }
+}
+  
+
+  private  set_session(response : any){
+    console.log(response.user)
+     this.storageSession.set(SESSION_STORAGE.TOKEN, response.Token)
+     this.storageSession.set(SESSION_STORAGE.USER, response.user)
+     this.storageSession.set(SESSION_STORAGE.CLIENT,response.client)
+     this.storageSession.set(SESSION_STORAGE.MENU,response.menu)
+     this.storageSession.set(SESSION_STORAGE.ROLE,response.role)
+     this.storageSession.set(SESSION_STORAGE.PERMISSIONS,response.rolepermission)
   }
 }

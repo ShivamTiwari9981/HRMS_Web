@@ -1,6 +1,8 @@
 <mat-toolbar class="navbar">
 
   <div class="left-section">
+    @if(IsCompanyProfileCreate)
+    {
     <button
       mat-icon-button
       class="icon-btn"
@@ -9,6 +11,8 @@
       <mat-icon>menu</mat-icon>
 
     </button>
+    }
+    
 
     <span class="logo">HRMS Portal</span>
   </div>
@@ -21,7 +25,7 @@
 
     <button mat-button [matMenuTriggerFor]="menu">
       <mat-icon>account_circle</mat-icon>
-      Admin
+      {{userName}}
     </button>
 
     <mat-menu #menu="matMenu">
@@ -30,7 +34,8 @@
         Profile
       </button>
 
-      <button mat-menu-item>
+      <button mat-menu-item (click)="logout()">
+        
         <mat-icon>logout</mat-icon>
         Logout
       </button>

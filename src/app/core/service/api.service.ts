@@ -17,6 +17,7 @@ export class ApiService {
 
   post<T>(url: string, body: any) {
     this.api_url =this.apiURL+url;
+    console.log(this.api_url)
     return this.http.post<T>(this.api_url, body);
   }
 

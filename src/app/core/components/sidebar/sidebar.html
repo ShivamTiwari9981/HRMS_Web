@@ -2,43 +2,45 @@
 
   <!-- Logo -->
   <div class="logo-section">
-    <h2>HRMS</h2>
+    <h1>HRMS</h1>
   </div>
 
   <!-- Menu -->
   <div class="menu-container">
-    @for (item of menuItems; track item.title) {
+    @for (item of menuItems; track item.MenuName) {
 
-      @if (!item.children) {
-        <!-- Normal Menu -->
+      <!-- Normal Menu -->
+      @if (item.SubMenus == null) {
         <a
           class="menu-item"
-          [routerLink]="item.route"
+          [routerLink]="item.RouterLink"
           routerLinkActive="active-menu">
           <div class="menu-left">
-            <mat-icon>{{ item.icon }}</mat-icon>
-            <span>{{ item.title }}</span>
+            <mat-icon>{{ item.MenuIcon }}</mat-icon>
+            <span>{{ item.MenuName }}</span>
           </div>
         </a>
-      } @else {
-        <!-- Expandable Menu -->
+      }
+
+      <!-- Expandable Menu -->
+      @if (item.SubMenu?.length) {
         <mat-expansion-panel class="menu-panel">
           <mat-expansion-panel-header>
             <div class="menu-left">
-              <mat-icon>{{ item.icon }}</mat-icon>
-              <span>{{ item.title }}</span>
+              <mat-icon>{{ item.MenuIcon }}</mat-icon>
+              <span>{{ item.MenuName }}</span>
             </div>
           </mat-expansion-panel-header>
 
-          <!-- Child Items -->
+          
           <div class="submenu">
-            @for (child of item.children; track child.title) {
+            @for (child of item.SubMenu; track child.MenuName) {
               <a
                 class="submenu-item"
-                [routerLink]="child.route"
+                [routerLink]="child.RouterLink"
                 routerLinkActive="active-submenu">
-                <mat-icon>{{ child.icon }}</mat-icon>
-                <span>{{ child.title }}</span>
+                <mat-icon>{{ child.MenuIcon }}</mat-icon>
+                <span>{{ child.MenuName }}</span>
               </a>
             }
           </div>

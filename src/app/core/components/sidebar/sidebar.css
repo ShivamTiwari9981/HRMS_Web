@@ -2,7 +2,8 @@
   width: 270px;
   height: 100vh;
 
-  background: #020817;
+  /* background: #020817; */
+  background: linear-gradient(135deg, #3f51b5, #673ab7);
 
   padding: 24px 16px;
 

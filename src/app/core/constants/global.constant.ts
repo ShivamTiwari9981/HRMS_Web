@@ -5,11 +5,16 @@ export const APP_CONFIG = {
 
 export const API_END_POINT = {
         API_LOGIN: "/Account/login",
-        API_CLIENT_REGISTER:"/auth/client-register",
-        API_SIGNUP :"/auth/signup"
+        API_CLIENT_REGISTER:"/Client/register-client",
+        API_SIGNUP :"/Account/Signup"
 }
 
 
 export const SESSION_STORAGE = {
-  TOKEN:"TOKEN"
+  TOKEN:"TOKEN",
+  CLIENT :"CLIENT",
+  MENU : "MENU",
+  ROLE : "ROLE",
+  PERMISSIONS:"PERMISSIONS",
+  USER : "USER"
 }

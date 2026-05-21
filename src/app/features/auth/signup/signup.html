@@ -14,13 +14,13 @@
     <!-- Email -->
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Email</mat-label>
-      <input matInput type="email" formControlName="Email">
+      <input matInput type="email" formControlName="UserEmail">
 
-      <mat-error if="signupForm.get('Email')?.hasError('required')">
+      <mat-error if="signupForm.get('UserEmail')?.hasError('required')">
         Email is required
       </mat-error>
 
-      <mat-error if="signupForm.get('Email')?.hasError('email')">
+      <mat-error if="signupForm.get('UserEmail')?.hasError('UserEmail')">
         Invalid email
       </mat-error>
     </mat-form-field>
@@ -101,7 +101,7 @@
 
     <!-- Button -->
     <button mat-raised-button color="primary"  class="full-width">
-      Register
+      Signup
     </button>
 
   </form>
