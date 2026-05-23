@@ -1,0 +1,87 @@
+.company-container {
+  padding: 24px;
+  background: #f5f7fb;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.company-form {
+  width: 100%;
+}
+
+.company-card {
+  width: 100%;
+  max-width: 1300px;
+  margin: auto;
+  padding: 32px;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.card-header p {
+  margin: 4px 0 0;
+  color: #6b7280;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+textarea {
+  resize: none;
+}
+
+/* Responsive */
+
+@media screen and (max-width: 768px) {
+
+  .company-card {
+    padding: 20px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-buttons {
+    width: 100%;
+  }
+
+  .header-buttons button {
+    flex: 1;
+  }
+
+}

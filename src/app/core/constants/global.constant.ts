@@ -6,7 +6,8 @@ export const APP_CONFIG = {
 export const API_END_POINT = {
         API_LOGIN: "/Account/login",
         API_CLIENT_REGISTER:"/Client/register-client",
-        API_SIGNUP :"/Account/Signup"
+        API_SIGNUP :"/Account/Signup",
+        COMPANY_DROPDOWN_DATA :"/Master/company-dropdown"
 }
 
 

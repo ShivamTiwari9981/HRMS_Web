@@ -1,1 +1,188 @@
-<p>comapny-setup works!</p>
+<div class="company-container">
+
+  <form
+    class="company-form"
+    [formGroup]="companyForm"
+    (ngSubmit)="RegisterCompany()">
+
+    <mat-card class="company-card">
+
+      <!-- Header -->
+      <div class="card-header">
+
+        <div>
+          <h2>Company Registration</h2>
+          <p>Create your company profile</p>
+        </div>
+
+        <div class="header-buttons">
+
+          <button
+            mat-stroked-button
+            color="warn"
+            type="button"
+            (click)="companyForm.reset()">
+
+            <mat-icon>refresh</mat-icon>
+            Reset
+
+          </button>
+
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit">
+
+            <mat-icon>save</mat-icon>
+            {{ save }}
+
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- Form Grid -->
+      <div class="form-grid">
+
+        <!-- Company Name -->
+        <mat-form-field appearance="outline">
+          <mat-label>Company Name</mat-label>
+
+          <input
+            matInput
+            formControlName="CompanyName"
+            placeholder="Enter company name">
+
+          <mat-icon matSuffix>business</mat-icon>
+
+          <mat-error If="companyForm.get('CompanyName')?.hasError('required')">
+            Company name is required
+          </mat-error>
+
+        </mat-form-field>
+
+        <!-- Company Email -->
+        <mat-form-field appearance="outline">
+          <mat-label>Company Email</mat-label>
+
+          <input
+            matInput
+            type="email"
+            formControlName="CompanyEmail"
+            placeholder="Enter email">
+
+          <mat-icon matSuffix>email</mat-icon>
+
+          <mat-error If="companyForm.get('CompanyEmail')?.hasError('required')">
+            Email is required
+          </mat-error>
+
+        </mat-form-field>
+
+        <!-- Phone -->
+        <mat-form-field appearance="outline">
+          <mat-label>Phone Number</mat-label>
+
+          <input
+            matInput
+            formControlName="Phone"
+            placeholder="Enter phone number">
+
+          <mat-icon matSuffix>phone</mat-icon>
+
+        </mat-form-field>
+
+        <!-- GST -->
+        <mat-form-field appearance="outline">
+          <mat-label>GST Number</mat-label>
+
+          <input
+            matInput
+            formControlName="GSTNumber"
+            placeholder="Enter GST number">
+
+          <mat-icon matSuffix>receipt_long</mat-icon>
+
+        </mat-form-field>
+
+        <!-- Subscription Plan -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Subscription Plan</mat-label>
+
+          <mat-select formControlName="SubscriptionPlanId">
+
+            @for (plan of subscriptionPlans; track plan.SubscriptionPlanId) {
+
+              <mat-option [value]="plan.SubscriptionPlanId">
+                {{ plan.PlanName }}
+              </mat-option>
+
+            }
+
+          </mat-select>
+
+        </mat-form-field>
+
+        <!-- Company Type -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Company Type</mat-label>
+
+          <mat-select formControlName="ComapnyTypeId">
+
+            @for (types of CompanyTypes; track types.Id) {
+
+              <mat-option [value]="types.Id">
+                {{ types.Name }}
+              </mat-option>
+
+            }
+
+          </mat-select>
+
+        </mat-form-field>
+
+        <!-- Subscription End Date -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Subscription End Date</mat-label>
+
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="SubscriptionEndDate">
+
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker">
+          </mat-datepicker-toggle>
+
+          <mat-datepicker #picker></mat-datepicker>
+
+        </mat-form-field>
+
+      </div>
+
+      <!-- Address -->
+      <mat-form-field
+        appearance="outline"
+        class="full-width">
+
+        <mat-label>Company Address</mat-label>
+
+        <textarea
+          matInput
+          rows="5"
+          formControlName="Address"
+          placeholder="Enter company address">
+        </textarea>
+
+      </mat-form-field>
+
+    </mat-card>
+
+  </form>
+
+</div>

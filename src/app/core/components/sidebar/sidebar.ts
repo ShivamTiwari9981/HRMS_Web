@@ -32,5 +32,15 @@ export class Sidebar implements OnInit {
     // this.menuItems = this.sidebarService.getMenu();
     
     this.menuItems=this.storageService.get(SESSION_STORAGE.MENU);
+    this.menuItems = this.menuItems.sort((a, b) => {
+
+  // Dashboard always first
+  if (a.MenuName === 'Dashboard') return -1;
+  if (b.MenuName === 'Dashboard') return 1;
+
+  // Other menus by display order
+  return a.DisplayOrder - b.DisplayOrder;
+
+});
   }
 }

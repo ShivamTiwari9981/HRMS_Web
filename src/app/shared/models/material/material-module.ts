@@ -15,7 +15,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
   declarations: [],
   imports: [
     CommonModule,
-    CommonModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
