@@ -12,7 +12,15 @@ import { StorageService } from '../../../core/service/storage.service';
 import { SESSION_STORAGE } from '../../../core/constants/global.constant';
 @Component({
   selector: 'app-login',
-  imports: [MatCard, MatFormField, MatLabel, MatError,MatInputModule,MatButtonModule,RouterModule,ReactiveFormsModule],
+  imports: [
+    MatCard,
+   MatFormField, 
+   MatLabel, 
+   MatError,
+   MatInputModule,
+   MatButtonModule,
+   RouterModule,
+   ReactiveFormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -47,7 +55,6 @@ export class Login {
       this.authService.login(this.loginForm.value)
     );
     if (response.IsSuccess) {
-
       this.set_session(
         response.Data
       );
@@ -58,9 +65,10 @@ export class Login {
       } else {
 
         this.router.navigate(['/company-setup']);
+        
       }
-
-      this.notification.success(response.Message);
+     this.notification.success(response.Message+" "+response.Data.user.UserName);
+      
     }
 
   } catch (error: any) {
@@ -77,7 +85,6 @@ export class Login {
   
 
   private  set_session(response : any){
-    console.log(response.user)
      this.storageSession.set(SESSION_STORAGE.TOKEN, response.Token)
      this.storageSession.set(SESSION_STORAGE.USER, response.user)
      this.storageSession.set(SESSION_STORAGE.CLIENT,response.client)
