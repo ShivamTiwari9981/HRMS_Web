@@ -28,9 +28,7 @@ export class Sidebar implements OnInit {
   menuItems: SidebarItem[] = [];
 
   ngOnInit(): void {
-    // 3. Populate array on initialization
-    // this.menuItems = this.sidebarService.getMenu();
-    
+
     this.menuItems=this.storageService.get(SESSION_STORAGE.MENU);
     this.menuItems = this.menuItems.sort((a, b) => {
 

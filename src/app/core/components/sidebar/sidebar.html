@@ -1,53 +1,50 @@
 <div class="sidebar">
-
-  <!-- Logo -->
+  <!-- Logo Section -->
   <div class="logo-section">
     <h1>HRMS</h1>
   </div>
 
-  <!-- Menu -->
+  <!-- Menu Container -->
   <div class="menu-container">
     @for (item of menuItems; track item.MenuName) {
-
-      <!-- Normal Menu -->
-      @if (item.SubMenus == null) {
+      <!-- Regular Menu Item (No Submenu) -->
+      @if (item.SubMenus == null && !item.SubMenu?.length) {
         <a
           class="menu-item"
           [routerLink]="item.RouterLink"
-          routerLinkActive="active-menu">
+          routerLinkActive="active-menu"
+          [routerLinkActiveOptions]="{ exact: true }">
           <div class="menu-left">
-            <mat-icon>{{ item.MenuIcon }}</mat-icon>
+            <mat-icon [attr.aria-hidden]="true">{{ item.MenuIcon }}</mat-icon>
             <span>{{ item.MenuName }}</span>
           </div>
         </a>
       }
 
-      <!-- Expandable Menu -->
+      <!-- Expandable Menu (With Submenu) -->
       @if (item.SubMenu?.length) {
         <mat-expansion-panel class="menu-panel">
           <mat-expansion-panel-header>
             <div class="menu-left">
-              <mat-icon>{{ item.MenuIcon }}</mat-icon>
+              <mat-icon [attr.aria-hidden]="true">{{ item.MenuIcon }}</mat-icon>
               <span>{{ item.MenuName }}</span>
             </div>
           </mat-expansion-panel-header>
 
-          
           <div class="submenu">
             @for (child of item.SubMenu; track child.MenuName) {
               <a
                 class="submenu-item"
                 [routerLink]="child.RouterLink"
-                routerLinkActive="active-submenu">
-                <mat-icon>{{ child.MenuIcon }}</mat-icon>
+                routerLinkActive="active-submenu"
+                [routerLinkActiveOptions]="{ exact: true }">
+                <mat-icon [attr.aria-hidden]="true">{{ child.MenuIcon }}</mat-icon>
                 <span>{{ child.MenuName }}</span>
               </a>
             }
           </div>
         </mat-expansion-panel>
       }
-
     }
   </div>
-
 </div>

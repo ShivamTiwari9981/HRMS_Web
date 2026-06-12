@@ -1,0 +1,42 @@
+<mat-card class="upload-card">
+  <mat-card-header>
+    <mat-card-title>Upload PDF Document</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Hidden HTML File Input -->
+    <input
+      type="file"
+      #fileInput
+      hidden
+      accept=".pdf"
+      (change)="onFileSelected($event)"
+    />
+
+    <!-- Trigger Button -->
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="triggerFileInput()">
+      Select PDF
+    </button>
+
+    <!-- Angular Built-in Control Flow Block -->
+    @if (selectedFile(); as file) {
+      <div class="file-info">
+        <p><strong>File:</strong> {{ file.name }}</p>
+        <p><strong>Size:</strong> {{ file.size / 1024 | number:'1.0-2' }} KB</p>
+      </div>
+    }
+
+    <!-- Upload Action Button -->
+    <button
+      mat-raised-button
+      color="accent"
+      
+      (click)="uploadFile()">
+      {{ isUploading() ? 'Uploading...' : 'Upload PDF' }}
+    </button>
+
+  </mat-card-content>
+</mat-card>

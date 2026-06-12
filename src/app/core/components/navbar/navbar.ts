@@ -1,37 +1,40 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output, OnInit } from '@angular/core';
 import { MatToolbar } from "@angular/material/toolbar";
 import { MatIcon } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatBadgeModule } from '@angular/material/badge';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../../service/auth.service';
 import { StorageService } from '../../service/storage.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [MatToolbar, MatIcon, MatMenuModule,MatSidenavModule],
+  imports: [CommonModule, MatToolbar, MatIcon, MatMenuModule, MatSidenavModule, MatDividerModule, MatBadgeModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
-export class Navbar {
+export class Navbar implements OnInit {
+  userName: string = "";
+  IsCompanyProfileCreate: boolean = true;
 
-userName :string ="";
-private storageService = inject(StorageService)
-private authService = inject(AuthService)
-@Output()
-toggleSidebar = new EventEmitter<void>();
-IsCompanyProfileCreate : boolean =true;
-onToggleSidebar(): void {
-    this.toggleSidebar.emit();
-}
+  private storageService = inject(StorageService);
+  private authService = inject(AuthService);
 
- ngOnInit() {
+  @Output()
+  toggleSidebar = new EventEmitter<void>();
+
+  ngOnInit() {
     this.userName = this.storageService.getUserEmail();
-    this.IsCompanyProfileCreate=this.storageService.IsCompanyProfieCompete();
+    this.IsCompanyProfileCreate = this.storageService.IsCompanyProfieCompete();
+  }
+
+  onToggleSidebar(): void {
+    this.toggleSidebar.emit();
   }
 
   logout(): void {
-
-  this.authService.logout();
-
-}
+    this.authService.logout();
+  }
 }
