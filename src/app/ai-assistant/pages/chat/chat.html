@@ -1,0 +1,56 @@
+<!-- <div class="container">
+
+  <div class="header">
+    <h2>HRMS AI Assistant</h2>
+  </div>
+
+  <div class="upload-section">
+
+    <input
+      type="file"
+      (change)="onFileSelected($event)"
+      accept=".pdf">
+
+    <button
+      class="upload-btn"
+      (click)="uploadDocument()">
+      Upload Document
+    </button>
+
+  </div>
+
+  <div class="chat-container">
+    
+    <div
+      *ngFor="let msg of messages"
+      class="message">
+
+      <div
+        [ngClass]="{
+          'user-message': msg.role === 'user',
+          'ai-message': msg.role === 'assistant'
+        }">
+
+        {{ msg.content }}
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="input-section">
+
+    <input
+      type="text"
+      [(ngModel)]="query"
+      placeholder="Ask HR policy or leave related questions...">
+
+    <button
+      (click)="sendMessage()">
+      Send
+    </button>
+
+  </div>
+
+</div> -->

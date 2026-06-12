@@ -1,0 +1,50 @@
+<div class="department-create-container">
+  <div class="header-row">
+    <div>
+      <h2>Add Department</h2>
+      <p>Create a new department and set its details.</p>
+    </div>
+    <button mat-icon-button color="primary" routerLink="/departments/list" aria-label="Back to department list">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+
+  <mat-card class="department-card">
+    <form [formGroup]="departmentForm" (ngSubmit)="saveDepartment()" class="department-form">
+      <div class="form-grid">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Department Name</mat-label>
+          <input matInput formControlName="DepartmentName" placeholder="Enter department name" />
+         @if(submitted ) 
+         {<mat-error>
+            Department name is required.
+          </mat-error>
+         }
+        </mat-form-field>
+
+        
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="Description" placeholder="Optional description" rows="4"></textarea>
+        </mat-form-field>
+
+        
+
+        <mat-slide-toggle formControlName="IsActive">Active</mat-slide-toggle>
+      </div>
+
+      <div class="button-row">
+        <button mat-flat-button color="primary" type="submit" [disabled]="loading">
+          <mat-icon>save</mat-icon>
+          Save
+        </button>
+        <button mat-stroked-button color="warn" type="button" (click)="cancel()" [disabled]="loading">
+          <mat-icon>cancel</mat-icon>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+

@@ -1,46 +1,49 @@
 <mat-toolbar class="navbar">
-
   <div class="left-section">
-    @if(IsCompanyProfileCreate)
-    {
-    <button
-      mat-icon-button
-      class="icon-btn"
-      (click)="onToggleSidebar()">
-
-      <mat-icon>menu</mat-icon>
-
-    </button>
+    @if(IsCompanyProfileCreate) {
+      <button
+        mat-icon-button
+        class="menu-toggle-btn"
+        aria-label="Toggle sidebar"
+        (click)="onToggleSidebar()">
+        <mat-icon>menu</mat-icon>
+      </button>
     }
-    
-
     <span class="logo">HRMS Portal</span>
   </div>
 
   <div class="right-section">
-
-    <button mat-icon-button matBadge="5" matBadgeColor="warn">
+    <button
+      mat-icon-button
+      class="notification-btn"
+      matBadge="5"
+      matBadgeColor="warn"
+      aria-label="Notifications">
       <mat-icon>notifications</mat-icon>
     </button>
 
-    <button mat-button [matMenuTriggerFor]="menu">
+    <div class="divider"></div>
+
+    <button
+      mat-button
+      class="user-menu-btn"
+      [matMenuTriggerFor]="userMenu"
+      aria-label="User menu">
       <mat-icon>account_circle</mat-icon>
-      {{userName}}
+      <span class="username">{{ userName }}</span>
+      <mat-icon class="dropdown-arrow">expand_more</mat-icon>
     </button>
 
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+    <mat-menu #userMenu="matMenu" class="user-dropdown-menu">
+      <button mat-menu-item class="menu-item-profile">
         <mat-icon>person</mat-icon>
-        Profile
+        <span>Profile</span>
       </button>
-
-      <button mat-menu-item (click)="logout()">
-        
+      <mat-divider></mat-divider>
+      <button mat-menu-item class="menu-item-logout" (click)="logout()">
         <mat-icon>logout</mat-icon>
-        Logout
+        <span>Logout</span>
       </button>
     </mat-menu>
-
   </div>
-
 </mat-toolbar>

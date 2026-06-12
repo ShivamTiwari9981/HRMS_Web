@@ -15,7 +15,7 @@ import { RegisterClientModel } from '../../models/register-client';
 import { ClientService } from '../../client.service';
 import { firstValueFrom } from 'rxjs';
 import {provideNativeDateAdapter} from '@angular/material/core';
-import { FormModuleModule } from '../../../../shared/models/form.module/form.module-module';
+import { FormModuleModule } from '../../../../shared/moduls/form.module/form.module-module';
 import { MatCard, MatCardModule } from "@angular/material/card";
 @Component({
   selector: 'app-comapny-setup',

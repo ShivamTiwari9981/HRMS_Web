@@ -1,8 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MaterialModule } from './shared/models/material/material-module';
 import { AuthService } from './core/service/auth.service';
 import { StorageService } from './core/service/storage.service';
+import { MaterialModule } from './shared/moduls/material/material-module';
 
 
 @Component({

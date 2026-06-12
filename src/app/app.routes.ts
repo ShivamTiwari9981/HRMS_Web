@@ -50,6 +50,26 @@ export const routes: Routes = [
           import('./features/user-management/users/users-module')
             .then(m => m.UsersModule)
       },
+
+      {
+        path: 'employee',
+        loadChildren: () =>
+          import('./features/employee/employee-module')
+            .then(m => m.EmployeeModule)
+      },
+      {
+        path: 'departments',
+        loadChildren: () =>
+          import('./features/department/department-module')
+            .then(m => m.DepartmentModule)
+      },
+
+      {
+        path: 'assistent',
+        loadChildren: () =>
+          import('./ai-assistant/ai-assistant-module')
+            .then(m => m.AiAssistantModule)
+      },
     ]
   },
 
