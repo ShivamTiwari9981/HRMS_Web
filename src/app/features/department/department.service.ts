@@ -46,4 +46,12 @@ export class DepartmentService {
       id
     );
   }
+
+  reOpenDepartment(id : string) {
+    return this.api_service.activate<any>(
+      API_END_POINT.ACTIVATE_DEPARTMENT,
+      null,
+      id,
+    );
+  }
 }

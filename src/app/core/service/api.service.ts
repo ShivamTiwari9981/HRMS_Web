@@ -19,16 +19,11 @@ export class ApiService {
   
   get<T>(endpoint: string,apiType: ApiType = ApiType.DotNet) {
     return this.http.get<T>(
-      `${this.getBaseUrl(apiType)}/${endpoint}`
+      `${this.getBaseUrl(apiType)}${endpoint}`
     );
   }
 
-  // get<T>(url: string) {
-  //   return this.http.get<T>(`${this.apiURL}${url}`);
-  // }  
-  
   getById<T>(endpoint: string,id:string,apiType: ApiType = ApiType.DotNet) {
-    // return this.http.get<T>(`${this.apiURL}${url}/${id}`);
      return this.http.get<T>(
       `${this.getBaseUrl(apiType)}${endpoint}/${id}`
     );
@@ -55,6 +50,13 @@ export class ApiService {
   delete<T>(endpoint: string,id:string,apiType: ApiType = ApiType.DotNet) {
     return this.http.delete<T>(
       `${this.getBaseUrl(apiType)}${endpoint}/${id}`
+    );
+  }
+
+  activate<T>(endpoint: string,body: any,id:string,apiType: ApiType = ApiType.DotNet) {
+    return this.http.patch<T>(
+      `${this.getBaseUrl(apiType)}${endpoint}/${id}`,
+      body
     );
   }
   

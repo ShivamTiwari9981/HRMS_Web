@@ -1,3 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, sans-serif;
+  background: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .employee-container {
   padding: 20px;
 }
@@ -20,13 +36,122 @@
 
 table {
   width: 100%;
+  min-width: 800px;
 }
 
-
-.edit-btn mat-icon {
-  color: #1976d2;
+.employee-container {
+  padding: 24px;
 }
 
-.delete-btn mat-icon {
-  color: #d32f2f;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.header button {
+  min-width: 160px;
+}
+
+.table-container {
+  overflow-x: auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  padding: 16px;
+}
+
+.w-100 {
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.mat-header-cell {
+  font-weight: 600;
+}
+
+.mat-cell,
+.mat-header-cell {
+  padding: 14px 12px;
+}
+
+.status-active {
+  color: #166534;
+  background: #dcfce7;
+  padding: 6px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-inactive {
+  color: #b91c1c;
+  background: #fee2e2;
+  padding: 6px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.danger{
+  color: #ac0d0d;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-buttons button {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+}
+
+@media (max-width: 960px) {
+  table {
+    min-width: 100%;
+  }
+
+  .employee-container {
+    padding: 16px;
+  }
+
+  .table-container {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 720px) {
+  .header {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .header button {
+    width: 100%;
+  }
+
+  .table-container {
+    padding: 12px 8px;
+  }
+
+  .mat-cell,
+  .mat-header-cell {
+    padding: 10px 8px;
+  }
+
+  .action-buttons {
+    flex-wrap: wrap;
+  }
 }

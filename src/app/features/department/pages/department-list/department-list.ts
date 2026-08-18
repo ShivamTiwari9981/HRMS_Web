@@ -82,6 +82,21 @@ private router = inject(Router);
     });
   }
 
+  reopenDepartment(departmentId : string){
+    this.departmentService.reOpenDepartment(departmentId).subscribe({
+      next: (response) => {
+        if(response.IsSuccess)
+          this.loadDepartment()
+        else{
+        
+        }
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
   
 
 

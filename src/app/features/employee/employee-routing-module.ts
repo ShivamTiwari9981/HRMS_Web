@@ -6,17 +6,25 @@ import { EmpCreate } from './pages/emp-create/emp-create';
 const routes: Routes = [
   {
       path:'',
-      component:EmpList
+      component:EmpList,
+      data: { breadcrumb: 'Employee List' }
     },
   
     {
       path:'list',
-      component:EmpList
+      component:EmpList,
+      data: { breadcrumb: 'Employee/Employee List' }
     },
   
     {
       path:'add',
-      component:EmpCreate
+      component:EmpCreate,
+      data: { breadcrumb: 'Employee/Add Employee' }
+    },
+    {
+      path:'edit/:id',
+      component:EmpCreate,
+      data: { breadcrumb: 'Employee/Edit Employee' }
     },
 
 ];

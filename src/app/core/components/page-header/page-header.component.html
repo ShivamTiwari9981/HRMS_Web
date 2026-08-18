@@ -1,0 +1,44 @@
+<div class="page-header">
+  <div class="header-content">
+    <div class="header-icon-section">
+      <mat-icon class="header-main-icon">{{ icon }}</mat-icon>
+    </div>
+    <div class="header-text-section">
+      <h1 class="page-title">{{ title }}</h1>
+      
+      @if (breadcrumbs && breadcrumbs.length > 0) {
+        <div class="breadcrumb-path">
+          @for (bc of breadcrumbs; track bc.label; let last = $last) {
+            @if (bc.url) {
+              <a [routerLink]="bc.url" class="breadcrumb-item" [class.active]="last">
+                @if (bc.icon) {
+                  <mat-icon class="breadcrumb-icon">{{ bc.icon }}</mat-icon>
+                }
+                <span>{{ bc.label }}</span>
+              </a>
+            } @else {
+              <span class="breadcrumb-item" [class.active]="last">
+                @if (bc.icon) {
+                  <mat-icon class="breadcrumb-icon">{{ bc.icon }}</mat-icon>
+                }
+                <span>{{ bc.label }}</span>
+              </span>
+            }
+
+            @if (!last) {
+              <mat-icon class="breadcrumb-separator">chevron_right</mat-icon>
+            }
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (showClose) {
+    <div class="header-actions">
+      <button mat-icon-button class="close-button" [matTooltip]="closeTooltip" (click)="onClose()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  }
+</div>

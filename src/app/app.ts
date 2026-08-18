@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { AuthService } from './core/service/auth.service';
 import { StorageService } from './core/service/storage.service';
 import { MaterialModule } from './shared/moduls/material/material-module';
+import { Breadcrumb } from "./shared/components/breadcrumb/breadcrumb";
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,MaterialModule],
+  imports: [RouterOutlet, MaterialModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

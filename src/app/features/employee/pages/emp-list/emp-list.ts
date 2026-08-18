@@ -115,8 +115,8 @@ export class EmpList implements AfterViewInit, OnDestroy {
     this.router.navigate(['/employee/add']);
   }
 
-  editEmployee(id: string): void {
-    // edit logic
+  editEmployee(employeeId : string){
+    this.router.navigate(['/employee/edit', employeeId]);
   }
 
   deleteEmployee(id: string): void {

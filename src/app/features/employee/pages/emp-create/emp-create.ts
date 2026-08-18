@@ -1,11 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
@@ -14,6 +14,27 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { EmployeeService } from '../../employee.service';
+import { Breadcrumb } from "../../../../shared/components/breadcrumb/breadcrumb";
+import { NotificationService } from '../../../../core/service/notification.service';
+// import {EmployeeDepartmentModel} from "../../../../core/models/department.model"
+// import { EmployeeDesignationModel } from '../../../../core/models/Designation.model';
+// import { ManagerModel } from '../../../../core/models/manager.model';
+// import { GenderModel } from '../../../../core/models/gender.model';
+
+export interface EmployeeDesignationModel {
+  ClientId :string,
+  DepartmentId : string
+  DesignationId : string
+  DesignationName :string,
+  DesignationCode :string,
+};
+
+export interface ManagerModel {
+ClientId :string,
+EmployeeId : string
+DepartmentId : string
+EmployeeEmail : string
+}
 
 @Component({
   selector: 'app-emp-create',
@@ -32,59 +53,100 @@ import { EmployeeService } from '../../employee.service';
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-  ],
+    Breadcrumb
+],
   templateUrl: './emp-create.html',
   styleUrls: ['./emp-create.css'],
 })
 export class EmpCreate implements OnInit {
   employeeForm!: FormGroup;
+  EmployeeId :string = "";
   submitted = false;
+  loading = false;
+  
 
-  departments = [
-    { id: 'dept-1', name: 'Human Resources' },
-    { id: 'dept-2', name: 'Finance' },
-    { id: 'dept-3', name: 'Engineering' },
-    { id: 'dept-4', name: 'Sales' },
-  ];
+  // departments: EmployeeDepartmentModel[] = [];
+   allDesignations: EmployeeDesignationModel[] = [];
+   filteredDesignations: EmployeeDesignationModel[] = [];
 
-  designations = [
-    { id: 'des-1', name: 'Software Engineer' },
-    { id: 'des-2', name: 'Senior Analyst' },
-    { id: 'des-3', name: 'Product Manager' },
-    { id: 'des-4', name: 'HR Specialist' },
-  ];
+   allManager :ManagerModel[] =[]
+   filteredManager: ManagerModel[] = [];
 
-  managers = [
-    { id: 'mgr-1', name: 'Alice Johnson' },
-    { id: 'mgr-2', name: 'Michael Brown' },
-    { id: 'mgr-3', name: 'Sara Lee' },
-  ];
+   
+  // managers: ManagerModel[] = [];
+  // genderOptions: GenderModel[] = [];
 
-  genderOptions = [
-    { value: 'Male', label: 'Male' },
-    { value: 'Female', label: 'Female' },
-    { value: 'Other', label: 'Other' },
-  ];
+  departments: any;
+  // allDesignations: any;
+  managers: any;
+  genderOptions: any;
+
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private route = inject(ActivatedRoute)
   private employeeService = inject(EmployeeService);
+  private notification = inject(NotificationService);
+  private cdr = inject(ChangeDetectorRef);
+
 
   ngOnInit(): void {
-    this.initForm();
+    this.getDropdownList();
+   const id = this.route.snapshot.paramMap.get('id');
+   this.EmployeeId = id ?"":""
+   if (this.EmployeeId) {
+    this.getEmployeeById();
+  } 
+  else {
+   this.initForm();
+    
   }
+  
+}
+
+getEmployeeById() {
+  this.employeeService.getEmployeeById(this.EmployeeId).subscribe({
+    next: (res: any) => {
+      this.loading = false;
+      console.log(res)
+      if (res?.IsSuccess) {
+        // Initialize form first if not already done
+        this.initForm();
+        this.employeeForm = res.Data,
+        // Then fill it with the retrieved data
+
+        this.employeeForm.patchValue({
+          
+          DepartmentName: res.Data.DepartmentName,
+          Description: res.Data.Description,
+          IsActive: res.Data.IsActive,
+        });
+        this.cdr.detectChanges();
+      } else {
+        this.notification.error(res?.Message || 'Unable to fetch department.');
+      }
+    },
+    error: (err: any) => {
+      this.loading = false;
+      console.error(err);
+      this.notification.error(err?.error?.Message || err?.message || 'Unable to fetch department.');
+    },
+  });
+}
+
 
   private initForm(): void {
     this.employeeForm = this.fb.group({
       EmployeeId: [''],
       EmployeeCode: ['', [Validators.required, Validators.maxLength(20)]],
-      FistName: ['', [Validators.required, Validators.maxLength(50)]],
+      FirstName: ['', [Validators.required, Validators.maxLength(50)]],
+      LastName: ['',],
       EmployeeEmail: ['', [Validators.required, Validators.email]],
       Phone: ['', [Validators.required, Validators.maxLength(20)]],
       DepartmentId: ['', Validators.required],
       DesignationId: ['', Validators.required],
-      ManagerId: ['', Validators.required],
-      Gender: ['Male', Validators.required],
+      ManagerId: [''],
+      Gender: [1, Validators.required],
       Address1: ['', [Validators.maxLength(200)]],
       Address2: ['', [Validators.maxLength(200)]],
       IsLoginUser: [false],
@@ -103,6 +165,38 @@ export class EmpCreate implements OnInit {
   get isLoginUserEnabled(): boolean {
     return this.employeeForm?.get('IsLoginUser')?.value;
   }
+
+  getDropdownList(){
+  this.employeeService.getDropdownList()
+    .subscribe({
+      next: (res) => {
+        console.log(res)
+        this.departments = res.Data.Departments;
+        this.allDesignations = res.Data.Designation;
+        this.allManager = res.Data.Manager;
+        this.genderOptions=res.Data.Gender
+
+        // this.genders = res.genders;
+      }
+    });
+    
+}
+  
+onDepartmentChange(event: MatSelectChange){
+  const departmentId = event.value;
+  
+  this.filteredDesignations = this.allDesignations.filter(
+      x => x.DepartmentId === departmentId
+    );
+    this.FilterManager(departmentId);
+}
+
+FilterManager(departmentId:string){
+  this.filteredManager = this.allManager.filter(
+      x => x.DepartmentId === departmentId
+    );
+}
+
 
   saveEmployee(): void {
     this.submitted = true;

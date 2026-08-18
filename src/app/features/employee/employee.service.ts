@@ -14,4 +14,17 @@ export class EmployeeService {
         data
       );
 }
+
+getEmployeeById(id : string) {
+    return this.api_service.getById<any>(
+      API_END_POINT.GET_EMPLOYEE_BY_ID,
+      id
+    );
+  }
+
+ getDropdownList() {
+      return this.api_service.get<any>(
+        API_END_POINT.GET_DROPDOWNLIST_EMPLOYEE
+      );
+    }
 }

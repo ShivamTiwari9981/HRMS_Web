@@ -1,0 +1,53 @@
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.header-content {
+  display: flex;
+  align-items: center;
+}
+.header-icon-section {
+  margin-right: 12px;
+}
+.header-main-icon {
+  font-size: 40px;
+}
+.header-text-section .page-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 500;
+}
+.breadcrumb-path {
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+}
+.breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: rgba(0,0,0,0.6);
+  font-size: 14px;
+}
+.breadcrumb-item .breadcrumb-icon,
+.breadcrumb-icon {
+  font-size: 18px;
+  vertical-align: middle;
+  color: rgba(0,0,0,0.54);
+}
+.breadcrumb-separator {
+  font-size: 16px;
+  color: rgba(0,0,0,0.38);
+  margin: 0 6px;
+}
+.breadcrumb-item.active {
+  color: #1976d2;
+  font-weight: 500;
+}
+.breadcrumb-item:not(.active):hover {
+  color: rgba(0,0,0,0.87);
+}
+.header-actions .close-button { }
